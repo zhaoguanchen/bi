@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiche.bigdata.mapper.generated.DatasetMapper">
+    <resultMap id="BaseResultMap" type="com.yiche.bigdata.entity.generated.Dataset">
+        <id column="res_id" jdbcType="VARCHAR" property="resId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="time_primary_key" jdbcType="VARCHAR" property="timePrimaryKey"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yiche.bigdata.entity.generated.Dataset">
+        <result column="data_json" jdbcType="LONGVARCHAR" property="dataJson"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    res_id, `name`, time_primary_key
+  </sql>
+    <sql id="Blob_Column_List">
+    data_json
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.yiche.bigdata.entity.generated.DatasetExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dataset
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.yiche.bigdata.entity.generated.DatasetExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from dataset
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="page != null">
+            limit #{page.begin} , #{page.length}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dataset
+        where res_id = #{resId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dataset
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.yiche.bigdata.entity.generated.DatasetExample">
+        delete from dataset
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.yiche.bigdata.entity.generated.Dataset">
+    insert into dataset (res_id, `name`, time_primary_key, 
+      data_json)
+    values (#{resId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{timePrimaryKey,jdbcType=VARCHAR}, 
+      #{dataJson,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.yiche.bigdata.entity.generated.Dataset">
+        insert into dataset
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resId != null">
+                res_id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="timePrimaryKey != null">
+                time_primary_key,
+            </if>
+            <if test="dataJson != null">
+                data_json,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="resId != null">
+                #{resId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="timePrimaryKey != null">
+                #{timePrimaryKey,jdbcType=VARCHAR},
+            </if>
+            <if test="dataJson != null">
+                #{dataJson,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.yiche.bigdata.entity.generated.DatasetExample"
+            resultType="java.lang.Long">
+        select count(*) from dataset
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update dataset
+        <set>
+            <if test="record.resId != null">
+                res_id = #{record.resId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                `name` = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.timePrimaryKey != null">
+                time_primary_key = #{record.timePrimaryKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dataJson != null">
+                data_json = #{record.dataJson,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update dataset
+        set res_id = #{record.resId,jdbcType=VARCHAR},
+        `name` = #{record.name,jdbcType=VARCHAR},
+        time_primary_key = #{record.timePrimaryKey,jdbcType=VARCHAR},
+        data_json = #{record.dataJson,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update dataset
+        set res_id = #{record.resId,jdbcType=VARCHAR},
+        `name` = #{record.name,jdbcType=VARCHAR},
+        time_primary_key = #{record.timePrimaryKey,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yiche.bigdata.entity.generated.Dataset">
+        update dataset
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="timePrimaryKey != null">
+                time_primary_key = #{timePrimaryKey,jdbcType=VARCHAR},
+            </if>
+            <if test="dataJson != null">
+                data_json = #{dataJson,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where res_id = #{resId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yiche.bigdata.entity.generated.Dataset">
+    update dataset
+    set `name` = #{name,jdbcType=VARCHAR},
+      time_primary_key = #{timePrimaryKey,jdbcType=VARCHAR},
+      data_json = #{dataJson,jdbcType=LONGVARCHAR}
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.yiche.bigdata.entity.generated.Dataset">
+    update dataset
+    set `name` = #{name,jdbcType=VARCHAR},
+      time_primary_key = #{timePrimaryKey,jdbcType=VARCHAR}
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

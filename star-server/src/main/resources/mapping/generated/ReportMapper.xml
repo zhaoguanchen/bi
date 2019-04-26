@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiche.bigdata.mapper.generated.ReportMapper">
+    <resultMap id="BaseResultMap" type="com.yiche.bigdata.entity.generated.Report">
+        <id column="res_id" jdbcType="VARCHAR" property="resId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="dataset_id" jdbcType="VARCHAR" property="datasetId"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yiche.bigdata.entity.generated.Report">
+        <result column="layout_json" jdbcType="LONGVARCHAR" property="layoutJson"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    res_id, `name`, dataset_id, `type`
+  </sql>
+    <sql id="Blob_Column_List">
+    layout_json
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.yiche.bigdata.entity.generated.ReportExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from report
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.yiche.bigdata.entity.generated.ReportExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from report
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="page != null">
+            limit #{page.begin} , #{page.length}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from report
+        where res_id = #{resId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from report
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.yiche.bigdata.entity.generated.ReportExample">
+        delete from report
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.yiche.bigdata.entity.generated.Report">
+    insert into report (res_id, `name`, dataset_id, 
+      `type`, layout_json)
+    values (#{resId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{datasetId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{layoutJson,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.yiche.bigdata.entity.generated.Report">
+        insert into report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resId != null">
+                res_id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="datasetId != null">
+                dataset_id,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="layoutJson != null">
+                layout_json,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="resId != null">
+                #{resId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="datasetId != null">
+                #{datasetId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="layoutJson != null">
+                #{layoutJson,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.yiche.bigdata.entity.generated.ReportExample"
+            resultType="java.lang.Long">
+        select count(*) from report
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update report
+        <set>
+            <if test="record.resId != null">
+                res_id = #{record.resId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                `name` = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.datasetId != null">
+                dataset_id = #{record.datasetId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null">
+                `type` = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.layoutJson != null">
+                layout_json = #{record.layoutJson,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update report
+        set res_id = #{record.resId,jdbcType=VARCHAR},
+        `name` = #{record.name,jdbcType=VARCHAR},
+        dataset_id = #{record.datasetId,jdbcType=VARCHAR},
+        `type` = #{record.type,jdbcType=INTEGER},
+        layout_json = #{record.layoutJson,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update report
+        set res_id = #{record.resId,jdbcType=VARCHAR},
+        `name` = #{record.name,jdbcType=VARCHAR},
+        dataset_id = #{record.datasetId,jdbcType=VARCHAR},
+        `type` = #{record.type,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yiche.bigdata.entity.generated.Report">
+        update report
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="datasetId != null">
+                dataset_id = #{datasetId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="layoutJson != null">
+                layout_json = #{layoutJson,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where res_id = #{resId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yiche.bigdata.entity.generated.Report">
+    update report
+    set `name` = #{name,jdbcType=VARCHAR},
+      dataset_id = #{datasetId,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER},
+      layout_json = #{layoutJson,jdbcType=LONGVARCHAR}
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.yiche.bigdata.entity.generated.Report">
+    update report
+    set `name` = #{name,jdbcType=VARCHAR},
+      dataset_id = #{datasetId,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER}
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </update>
+    <select id="countByDateSetId" parameterType="java.lang.String" resultType="int">
+    select
+    count(*)
+    from report
+    where dataset_id = #{dataSetId,jdbcType=VARCHAR}
+  </select>
+</mapper>

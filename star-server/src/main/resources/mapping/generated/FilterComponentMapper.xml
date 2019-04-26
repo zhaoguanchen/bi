@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiche.bigdata.mapper.generated.FilterComponentMapper">
+  <resultMap id="BaseResultMap" type="com.yiche.bigdata.entity.generated.FilterComponent">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="res_type" jdbcType="INTEGER" property="resType" />
+    <result column="res_id" jdbcType="VARCHAR" property="resId" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="connector_type" jdbcType="INTEGER" property="connectorType" />
+    <result column="col_key" jdbcType="VARCHAR" property="colKey" />
+    <result column="col_name" jdbcType="VARCHAR" property="colName" />
+    <result column="col_type" jdbcType="VARCHAR" property="colType" />
+    <result column="filter_type" jdbcType="VARCHAR" property="filterType" />
+    <result column="filter_value" jdbcType="VARCHAR" property="filterValue" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_modifier" jdbcType="VARCHAR" property="lastModifier" />
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, `name`, res_type, res_id, role_id, connector_type, col_key, col_name, col_type, 
+    filter_type, filter_value, description, creater, create_time, last_modifier, last_modify_time
+  </sql>
+  <select id="selectByExample" parameterType="com.yiche.bigdata.entity.generated.FilterComponentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from filter_component
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="page != null">
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from filter_component
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from filter_component
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiche.bigdata.entity.generated.FilterComponentExample">
+    delete from filter_component
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiche.bigdata.entity.generated.FilterComponent">
+    insert into filter_component (id, `name`, res_type, 
+      res_id, role_id, connector_type, 
+      col_key, col_name, col_type, 
+      filter_type, filter_value, description, 
+      creater, create_time, last_modifier, 
+      last_modify_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{resType,jdbcType=INTEGER}, 
+      #{resId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{connectorType,jdbcType=INTEGER}, 
+      #{colKey,jdbcType=VARCHAR}, #{colName,jdbcType=VARCHAR}, #{colType,jdbcType=VARCHAR}, 
+      #{filterType,jdbcType=VARCHAR}, #{filterValue,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastModifier,jdbcType=VARCHAR}, 
+      #{lastModifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiche.bigdata.entity.generated.FilterComponent">
+    insert into filter_component
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="resType != null">
+        res_type,
+      </if>
+      <if test="resId != null">
+        res_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="connectorType != null">
+        connector_type,
+      </if>
+      <if test="colKey != null">
+        col_key,
+      </if>
+      <if test="colName != null">
+        col_name,
+      </if>
+      <if test="colType != null">
+        col_type,
+      </if>
+      <if test="filterType != null">
+        filter_type,
+      </if>
+      <if test="filterValue != null">
+        filter_value,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastModifier != null">
+        last_modifier,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null">
+        #{resType,jdbcType=INTEGER},
+      </if>
+      <if test="resId != null">
+        #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="connectorType != null">
+        #{connectorType,jdbcType=INTEGER},
+      </if>
+      <if test="colKey != null">
+        #{colKey,jdbcType=VARCHAR},
+      </if>
+      <if test="colName != null">
+        #{colName,jdbcType=VARCHAR},
+      </if>
+      <if test="colType != null">
+        #{colType,jdbcType=VARCHAR},
+      </if>
+      <if test="filterType != null">
+        #{filterType,jdbcType=VARCHAR},
+      </if>
+      <if test="filterValue != null">
+        #{filterValue,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifier != null">
+        #{lastModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiche.bigdata.entity.generated.FilterComponentExample" resultType="java.lang.Long">
+    select count(*) from filter_component
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update filter_component
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resType != null">
+        res_type = #{record.resType,jdbcType=INTEGER},
+      </if>
+      <if test="record.resId != null">
+        res_id = #{record.resId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.connectorType != null">
+        connector_type = #{record.connectorType,jdbcType=INTEGER},
+      </if>
+      <if test="record.colKey != null">
+        col_key = #{record.colKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colName != null">
+        col_name = #{record.colName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colType != null">
+        col_type = #{record.colType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filterType != null">
+        filter_type = #{record.filterType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filterValue != null">
+        filter_value = #{record.filterValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null">
+        creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifier != null">
+        last_modifier = #{record.lastModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastModifyTime != null">
+        last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update filter_component
+    set id = #{record.id,jdbcType=INTEGER},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      res_type = #{record.resType,jdbcType=INTEGER},
+      res_id = #{record.resId,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
+      connector_type = #{record.connectorType,jdbcType=INTEGER},
+      col_key = #{record.colKey,jdbcType=VARCHAR},
+      col_name = #{record.colName,jdbcType=VARCHAR},
+      col_type = #{record.colType,jdbcType=VARCHAR},
+      filter_type = #{record.filterType,jdbcType=VARCHAR},
+      filter_value = #{record.filterValue,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      last_modifier = #{record.lastModifier,jdbcType=VARCHAR},
+      last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiche.bigdata.entity.generated.FilterComponent">
+    update filter_component
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null">
+        res_type = #{resType,jdbcType=INTEGER},
+      </if>
+      <if test="resId != null">
+        res_id = #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="connectorType != null">
+        connector_type = #{connectorType,jdbcType=INTEGER},
+      </if>
+      <if test="colKey != null">
+        col_key = #{colKey,jdbcType=VARCHAR},
+      </if>
+      <if test="colName != null">
+        col_name = #{colName,jdbcType=VARCHAR},
+      </if>
+      <if test="colType != null">
+        col_type = #{colType,jdbcType=VARCHAR},
+      </if>
+      <if test="filterType != null">
+        filter_type = #{filterType,jdbcType=VARCHAR},
+      </if>
+      <if test="filterValue != null">
+        filter_value = #{filterValue,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifier != null">
+        last_modifier = #{lastModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiche.bigdata.entity.generated.FilterComponent">
+    update filter_component
+    set `name` = #{name,jdbcType=VARCHAR},
+      res_type = #{resType,jdbcType=INTEGER},
+      res_id = #{resId,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      connector_type = #{connectorType,jdbcType=INTEGER},
+      col_key = #{colKey,jdbcType=VARCHAR},
+      col_name = #{colName,jdbcType=VARCHAR},
+      col_type = #{colType,jdbcType=VARCHAR},
+      filter_type = #{filterType,jdbcType=VARCHAR},
+      filter_value = #{filterValue,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_modifier = #{lastModifier,jdbcType=VARCHAR},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
